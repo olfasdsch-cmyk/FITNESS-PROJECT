@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client": "cd client && npm start",
+    "FITNESS_PROJECT": "cd FITNESS_PROJECT && npm start",
     "back": "nodemon server.js",
-    "dev": "concurrently \"npm run back\" \" npm run client\""
+    "dev": "concurrently \"npm run back\" \" npm run FITNESS_PROJECT\""
   },
   "author": "",
   "license": "ISC",
