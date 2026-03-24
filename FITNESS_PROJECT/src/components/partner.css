@@ -1,0 +1,123 @@
+/* Partner page full height */
+.partner-page {
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Permanent Marker', cursive;
+  position: relative;
+  overflow-x: hidden;
+  padding-top: 80px; /* leave space for navbar */
+}
+
+/* Video background */
+.background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* Hero section */
+.hero-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 0;
+  height: 100vh;
+}
+
+.hero-section .hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.hero-section h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+}
+
+.hero-section p {
+  font-size: 28px;
+  font-weight: 500;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+  margin: 5px 0;
+}
+
+.hero-rules {
+  font-size: 20px;
+  color: #ffffffcc; 
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+  margin-top: 15px;
+  font-family: 'Permanent Marker', cursive;
+}
+
+/* Cards container */
+.cards-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 40px 10px 80px 10px;
+  flex-wrap: wrap;
+}
+
+/* Partner cards */
+.coach-card {
+  flex: 1;
+  min-width: 30%;
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  color: white;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  opacity: 0.85;
+}
+
+.coach-card:hover .details {
+  display: block;
+}
+
+.coach-card h3 {
+  font-size: 24px;
+  margin-bottom: 8px;
+  color: #ff8311;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+}
+
+.coach-card .short {
+  font-size: 20px;
+  color: #272626b5;
+  margin-bottom: 4px;
+}
+
+.coach-card .details {
+  display: none;
+  font-size: 18px;
+  margin-top: 8px;
+  color: #ffffff;
+  line-height: 1.5;
+}
+
+/* Navbar always on top */
+.custom-navbar {
+  z-index: 1000;
+}

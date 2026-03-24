@@ -2,33 +2,64 @@
 .home-page {
   width: 100%;
   min-height: 100vh;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Permanent Marker', cursive;
+  position: relative; /* needed for video background */
+  overflow: hidden;
+}
+
+/* Video background */
+.background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2; /* behind everything */
 }
 
 /* Hero section layout */
 .hero-section {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
+  position: relative; /* for text above image */
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   color: white;
-  padding: 0 20px;
+  padding: 10px 20px; /* reduce padding top/bottom */
+  margin-top: 0; /* reduce space from navbar */
+  height: 100vh;
 }
 
-/* Hero text */
+/* Hero image above video */
+.hero-section .hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6; /* semi-transparent */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1; /* behind hero text */
+}
+
+/* Hero text above image */
+.hero-section .hero-content {
+  position: relative;
+  z-index: 1;
+  font-family: 'Permanent Marker', cursive;
+}
+
 .hero-section .hero-content h1 {
-  font-size: 3rem;
+  font-size: 48px; /* replaced 3rem with px */
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 16px; /* replaced 1rem */
   text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+  font-family: 'Permanent Marker', cursive;
 }
 
 .hero-section .hero-content p {
-  font-size: 1.5rem;
+  font-size: 24px; /* replaced 1.5rem */
   font-weight: 500;
   text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
 }
@@ -36,11 +67,17 @@
 /* Make sure navbar stays on top */
 .custom-navbar {
   z-index: 1000;
+  font-family: 'Permanent Marker', cursive;
 }
+
+/* FOOTER */
 .footer {
   background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
   color: #f5f5f5;
   padding: 60px 60px 20px 60px;
+  position: relative;
+  z-index: 2; /* above video */
+  font-family: 'Permanent Marker', cursive;
 }
 
 .footer-container {
@@ -52,6 +89,7 @@
 
 .footer-col {
   max-width: 320px;
+  font-family: 'Permanent Marker', cursive;
 }
 
 .footer-col h3,
@@ -66,6 +104,7 @@
   font-size: 15px;
   line-height: 1.7;
   color: #cccccc;
+  font-family: 'Permanent Marker', cursive;
 }
 
 .footer-col ul {
@@ -78,6 +117,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   color: #dddddd;
+  font-family: 'Permanent Marker', cursive;
 }
 
 .footer-col ul li:hover {
@@ -92,4 +132,5 @@
   border-top: 1px solid rgba(255,255,255,0.1);
   padding-top: 20px;
   color: #aaaaaa;
+  font-family: 'Permanent Marker', cursive;
 }

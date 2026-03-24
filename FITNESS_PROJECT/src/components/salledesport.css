@@ -1,0 +1,90 @@
+.salledesport-page {
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Permanent Marker', cursive;
+  position: relative;
+  padding-top: 70px; /* To prevent navbar overlap */
+  background: #1a1a1a;
+  color: white;
+}
+
+/* Hero Section */
+.hero-section {
+  position: relative;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.hero-section .hero-img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  opacity: 0.7;
+}
+
+.hero-section .hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hero-section h1 {
+  font-size: 48px;
+  color: #ff8311;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+}
+
+.hero-section p {
+  font-size: 24px;
+  color: #ffffffcc;
+}
+
+/* Gym Cards */
+.gyms-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 20px;
+}
+
+.gym-card {
+  flex: 1 1 30%;
+  background: #272727;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  min-width: 280px;
+}
+
+.gym-card:hover {
+  transform: scale(1.02);
+}
+
+.gym-img {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+}
+
+.gym-info {
+  padding: 15px;
+}
+
+.gym-info h2 {
+  font-size: 24px;
+  color: #ff8311;
+  margin-bottom: 10px;
+}
+
+.gym-info p {
+  font-size: 16px;
+  margin: 4px 0;
+  color: #ddd;
+}
+
+.gym-info strong {
+  color: #ffffff;
+}

@@ -42,6 +42,7 @@ function Navbarr() {
             <Nav.Link><Link to="/salledesport" style={{textDecoration:"none", color:"black"}}>GYMS</Link></Nav.Link>
             <Nav.Link><Link to="/partner" style={{textDecoration:"none", color:"black"}}>Find Partner</Link></Nav.Link>
             <Nav.Link><Link to="/Lifecoach" style={{textDecoration:"none", color:"black"}}>LifeCoach</Link></Nav.Link>
+             <Nav.Link><Link to="/Contact" style={{textDecoration:"none", color:"black"}}>Contact</Link></Nav.Link>
           </Nav>
 
           {/* Login on the right */}

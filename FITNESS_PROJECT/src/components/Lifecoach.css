@@ -1,0 +1,259 @@
+/* Lifecoach page full height */
+.lifecoach-page {
+  width: 100%;
+  min-height: 100vh;
+  font-family: 'Permanent Marker', cursive;
+  position: relative; /* for video background */
+  overflow-x: hidden;
+}
+
+/* Video background */
+.background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* Hero section layout */
+.hero-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 0;
+  height: 100vh;
+  font-family: 'Permanent Marker', cursive;
+}
+
+/* Hero image above video */
+.hero-section .hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Hero text above image */
+.hero-section .hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-section h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+  font-family: 'Permanent Marker', cursive;
+}
+
+.hero-section p {
+  font-size: 30px;
+  font-weight: 500;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+}
+
+/* Main cards container */
+.main-cards-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 40px 10px;
+  flex-wrap: wrap;
+  
+}
+.main-cards-container h2{
+  font-family: 'Permanent Marker', cursive;
+  color:#ff8311;
+}
+.main-card {
+  flex: 1;
+  min-width: 30%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  color: white;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Permanent Marker', cursive;
+  opacity: 0.9; /* slight transparency */
+}
+
+.main-card:hover {
+  transform: scale(1.02);
+}
+
+.card-details {
+  display: none;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.main-card.active .card-details {
+  display: block;
+}
+
+/* Section titles */
+.section-title {
+  font-size: 36px;       /* size in px */
+  color: #fffbf8;        /* orange color */
+  font-family: 'Permanent Marker', cursive;
+  text-align: center;  
+  
+}
+
+
+/* Coach cards container */
+.cards-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0 10px 40px 10px;
+  flex-wrap: wrap;
+}
+
+.coach-card {
+  flex: 1;
+  min-width: 30%;
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 15px;
+  color: white;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  opacity: 0.85; /* transparency */
+  font-family: 'Permanent Marker', cursive;
+}
+
+.coach-card:hover .details {
+  display: block;
+}
+
+.coach-card h3 {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.coach-card .short {
+  font-size: 18px;
+}
+
+.coach-card .details {
+  display: none;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+/* Make sure navbar stays on top */
+.custom-navbar {
+  z-index: 1000;
+  font-family: 'Permanent Marker', cursive;
+}
+
+/* Footer */
+.footer {
+  background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
+  color: #f5f5f5;
+  padding: 60px 60px 20px 60px;
+  position: relative;
+  z-index: 2;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.footer-col {
+  max-width: 320px;
+}
+
+.footer-col h3,
+.footer-col h4 {
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: #ff8311;
+  letter-spacing: 1px;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.footer-col p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #cccccc;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #dddddd;
+  font-family: 'Permanent Marker', cursive;
+}
+
+.footer-col ul li:hover {
+  color: #ff8311;
+  transform: translateX(5px);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 20px;
+  color: #aaaaaa;
+  font-family: 'Permanent Marker', cursive;
+}
+/* Card titles (Consistency, Hydration, etc.) */
+.coach-card h3 {
+  font-size: 24px; /* font size */
+  color:#ff8311;;  /* white text */
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.7); /* shadow for readability */
+  margin-bottom: 8px;
+  font-family: 'Permanent Marker', cursive;
+}
+
+/* Short subtitle under the title */
+.coach-card p.short {
+  font-size: 20px;
+  color: #272626b5;
+  margin-bottom: 4px;
+  font-family: 'Permanent Marker', cursive;
+}
+
+/* Description text */
+.coach-card p.details {
+  font-size: 20px;
+  color: #ffffff;
+  line-height: 1.5;
+  font-family: 'Permanent Marker', cursive;
+}

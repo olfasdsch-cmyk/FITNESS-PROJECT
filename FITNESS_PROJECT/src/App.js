@@ -10,6 +10,10 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Navbarr from "./components/Navbarr";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Lifecoach from "./components/Lifecoach";
+import Contact from "./components/Contact"; 
+import Salledesport from "./components/salledesport"; 
+import Partner from "./components/partner"; 
 function App() {
   const isAuth = localStorage.getItem("token");
   const dispatch = useDispatch();
@@ -24,8 +28,10 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
        <Route path="/profil" element={<Profil />} />
-
-       
+<Route path="/Lifecoach" element={<Lifecoach />} /> 
+       <Route path="/Contact" element={<Contact />} /> 
+       <Route path="/Salledesport" element={<Salledesport />} />
+       <Route path="/partner" element={<Partner />} /> 
        
        
        

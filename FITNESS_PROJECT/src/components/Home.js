@@ -2,25 +2,38 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import './Home.css';
 import background from './home-background.jpeg';
+import heroVideo from './hero-video.mp4'; // your video file
 
 function Home() {
   return (
     <div className="home-page">
-      
-      <section 
-        className="hero-section" 
-        style={{ backgroundImage: `url(${background})` }}
-      >
+
+      {/* VIDEO BACKGROUND */}
+      <video
+        className="background-video"
+        src={heroVideo}
+        autoPlay
+        loop
+        muted
+      />
+
+      {/* HERO SECTION */}
+      <section className="hero-section">
+        <img
+          src={background}
+          alt="Hero Background"
+          className="hero-img"
+        />
         <div className="hero-content">
-          <h1>Welcome to FITNESS PROJECT</h1>
+          <h1>Welcome to FITPARTNER</h1>
           <p>Find gyms, partners, and life coaches to reach your goals</p>
-        
         </div>
       </section>
 
+      {/* FOOTER */}
       <footer className="footer">
         <div className="footer-container">
-          
+
           <div className="footer-col">
             <h3>FITNESS PROJECT</h3>
             <p>Train smarter, connect faster, and achieve your goals with our all-in-one fitness platform.</p>
