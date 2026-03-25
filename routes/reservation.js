@@ -1,28 +1,26 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const reservation = require('../models/reservation');
-const reservation = require('../models/reservation');
-const reservation = require('../models/reservation');
+const Reservation = require("../models/reservation");
 
-//add salle
-
-router.post('/add', async (req, res) => {
-  const newreservation = new reservation(req.body);
-  await newreservation.save();
-  res.send("reservation added");
+// Add a new reservation
+router.post("/add", async (req, res) => {
+  try {
+    const newReservation = new Reservation(req.body);
+    await newReservation.save();
+    res.status(201).json({ message: "Reservation saved successfully", reservation: newReservation });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-//Get salle
-router.get('/', async (req, res) => {
-  const reservation = await reservation.find();
-  res.send(reservations);
+// Get all reservations (for admin)
+router.get("/", async (req, res) => {
+  try {
+    const reservations = await Reservation.find().populate("gymId");
+    res.json(reservations);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
-
-//Delete salle
-router.delete('/delete/:id', async (req, res) => {
-  await reservation.findByIdAndDelete(req.params.id);
-  res.send("reservation deleted");
-});
-
 
 module.exports = router;

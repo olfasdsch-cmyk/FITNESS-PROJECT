@@ -1,136 +1,136 @@
-/* Home page full height */
-.home-page {
+/* Container */
+.h-home-page {
   width: 100%;
   min-height: 100vh;
   font-family: 'Permanent Marker', cursive;
-  position: relative; /* needed for video background */
-  overflow: hidden;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* Video background */
-.background-video {
+/* Video Background */
+.h-background-video {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -2; /* behind everything */
+  z-index: -3;
 }
 
-/* Hero section layout */
-.hero-section {
-  position: relative; /* for text above image */
+/* Hero Section */
+.h-hero-section {
+  position: relative;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: white;
-  padding: 10px 20px; /* reduce padding top/bottom */
-  margin-top: 0; /* reduce space from navbar */
-  height: 100vh;
 }
 
-/* Hero image above video */
-.hero-section .hero-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.6; /* semi-transparent */
+/* Hero Image */
+.h-hero-img {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1; /* behind hero text */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.7;
+  z-index: -2; /* behind overlay and text */
 }
 
-/* Hero text above image */
-.hero-section .hero-content {
+/* Overlay for readability */
+.h-hero-section::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: -1; /* above image, below text */
+}
+
+/* Hero Text */
+.h-hero-content {
   position: relative;
   z-index: 1;
-  font-family: 'Permanent Marker', cursive;
+  color: white;
+  max-width: 700px;
+  padding: 0 20px;
 }
 
-.hero-section .hero-content h1 {
-  font-size: 48px; /* replaced 3rem with px */
-  font-weight: 700;
-  margin-bottom: 16px; /* replaced 1rem */
-  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-  font-family: 'Permanent Marker', cursive;
+.h-hero-content h1 {
+  font-size: 56px;
+  margin-bottom: 20px;
+  color: #ff8311;
+  text-shadow: 2px 2px 12px rgba(0,0,0,0.8);
 }
 
-.hero-section .hero-content p {
-  font-size: 24px; /* replaced 1.5rem */
-  font-weight: 500;
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
+.h-hero-content p {
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #f0f0f0;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
 }
 
-/* Make sure navbar stays on top */
-.custom-navbar {
-  z-index: 1000;
-  font-family: 'Permanent Marker', cursive;
-}
-
-/* FOOTER */
-.footer {
+/* Footer */
+.h-footer {
   background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
   color: #f5f5f5;
   padding: 60px 60px 20px 60px;
   position: relative;
-  z-index: 2; /* above video */
-  font-family: 'Permanent Marker', cursive;
+  z-index: 2;
 }
 
-.footer-container {
+.h-footer-container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 40px;
 }
 
-.footer-col {
+.h-footer-col {
   max-width: 320px;
-  font-family: 'Permanent Marker', cursive;
 }
 
-.footer-col h3,
-.footer-col h4 {
+.h-footer-col h3,
+.h-footer-col h4 {
   margin-bottom: 20px;
   font-weight: 700;
   color: #ff8311;
-  letter-spacing: 1px;
 }
 
-.footer-col p {
+.h-footer-col p {
   font-size: 15px;
   line-height: 1.7;
   color: #cccccc;
-  font-family: 'Permanent Marker', cursive;
 }
 
-.footer-col ul {
+.h-footer-col ul {
   list-style: none;
   padding: 0;
 }
 
-.footer-col ul li {
+.h-footer-col ul li {
   margin-bottom: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
   color: #dddddd;
-  font-family: 'Permanent Marker', cursive;
+  transition: 0.3s;
 }
 
-.footer-col ul li:hover {
+.h-footer-col ul li:hover {
   color: #ff8311;
   transform: translateX(5px);
 }
 
-.footer-bottom {
+.h-footer-bottom {
   text-align: center;
   margin-top: 40px;
   font-size: 14px;
   border-top: 1px solid rgba(255,255,255,0.1);
   padding-top: 20px;
   color: #aaaaaa;
-  font-family: 'Permanent Marker', cursive;
 }

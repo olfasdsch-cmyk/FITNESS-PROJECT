@@ -13,12 +13,16 @@ const salledesportSchema = new schema(
 activities: String,
 
 location: String,
+phone: String,
 
- phone: String,
+full_description:String,
 
+price_year:String,
 price_month: String,
 price_week:String,
 price_day:String,
+
+
 });
 
 module.exports = mongoose.model("salledesport", salledesportSchema);

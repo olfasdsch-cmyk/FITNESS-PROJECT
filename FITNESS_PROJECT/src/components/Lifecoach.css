@@ -1,5 +1,5 @@
 /* Lifecoach page full height */
-.lifecoach-page {
+.lc-page {
   width: 100%;
   min-height: 100vh;
   font-family: 'Permanent Marker', cursive;
@@ -8,7 +8,7 @@
 }
 
 /* Video background */
-.background-video {
+.lc-background-video {
   position: fixed;
   top: 0;
   left: 0;
@@ -19,7 +19,7 @@
 }
 
 /* Hero section layout */
-.hero-section {
+.lc-hero-section {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -30,11 +30,10 @@
   padding: 10px 20px;
   margin-top: 0;
   height: 100vh;
-  font-family: 'Permanent Marker', cursive;
 }
 
 /* Hero image above video */
-.hero-section .hero-img {
+.lc-hero-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -46,39 +45,40 @@
 }
 
 /* Hero text above image */
-.hero-section .hero-content {
+.lc-hero-section h1,
+.lc-hero-section p {
   position: relative;
   z-index: 1;
 }
 
-.hero-section h1 {
+/* Hero text styling */
+.lc-hero-section h1 {
   font-size: 48px;
   font-weight: 700;
   margin-bottom: 16px;
   text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-  font-family: 'Permanent Marker', cursive;
 }
 
-.hero-section p {
+.lc-hero-section p {
   font-size: 30px;
   font-weight: 500;
   text-shadow: 1px 1px 4px rgba(0,0,0,0.6);
 }
 
 /* Main cards container */
-.main-cards-container {
+.lc-main-cards-container {
   display: flex;
   justify-content: space-between;
   gap: 10px;
   margin: 40px 10px;
   flex-wrap: wrap;
-  
 }
-.main-cards-container h2{
-  font-family: 'Permanent Marker', cursive;
+
+.lc-main-cards-container h2 {
   color:#ff8311;
 }
-.main-card {
+
+.lc-main-card {
   flex: 1;
   min-width: 30%;
   background-size: cover;
@@ -90,36 +90,33 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  font-family: 'Permanent Marker', cursive;
-  opacity: 0.9; /* slight transparency */
+  opacity: 0.9;
 }
 
-.main-card:hover {
+.lc-main-card:hover {
   transform: scale(1.02);
 }
 
-.card-details {
+.lc-card-details {
   display: none;
   margin-top: 10px;
   font-size: 16px;
 }
 
-.main-card.active .card-details {
+.lc-main-card.active .lc-card-details {
   display: block;
 }
 
 /* Section titles */
-.section-title {
-  font-size: 36px;       /* size in px */
-  color: #fffbf8;        /* orange color */
-  font-family: 'Permanent Marker', cursive;
-  text-align: center;  
-  
+.lc-section-title {
+  font-size: 36px;
+  color: #fffbf8;
+  text-align: center;
+  margin: 20px 0;
 }
 
-
 /* Coach cards container */
-.cards-container {
+.lc-cards-container {
   display: flex;
   justify-content: space-between;
   gap: 10px;
@@ -127,7 +124,7 @@
   flex-wrap: wrap;
 }
 
-.coach-card {
+.lc-coach-card {
   flex: 1;
   min-width: 30%;
   height: 250px;
@@ -140,120 +137,88 @@
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
-  opacity: 0.85; /* transparency */
-  font-family: 'Permanent Marker', cursive;
+  opacity: 0.85;
 }
 
-.coach-card:hover .details {
+.lc-coach-card:hover .lc-details {
   display: block;
 }
 
-.coach-card h3 {
+.lc-coach-card h3 {
   font-size: 24px;
+  color:#ff8311;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
   margin-bottom: 8px;
 }
 
-.coach-card .short {
-  font-size: 18px;
+.lc-coach-card .lc-short {
+  font-size: 20px;
+  color: #272626b5;
+  margin-bottom: 4px;
 }
 
-.coach-card .details {
+.lc-coach-card .lc-details {
   display: none;
-  font-size: 16px;
-  margin-top: 8px;
-}
-
-/* Make sure navbar stays on top */
-.custom-navbar {
-  z-index: 1000;
-  font-family: 'Permanent Marker', cursive;
+  font-size: 20px;
+  color: #ffffff;
+  line-height: 1.5;
 }
 
 /* Footer */
-.footer {
+.lc-footer {
   background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
   color: #f5f5f5;
   padding: 60px 60px 20px 60px;
   position: relative;
   z-index: 2;
-  font-family: 'Permanent Marker', cursive;
 }
 
-.footer-container {
+.lc-footer-container {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 40px;
 }
 
-.footer-col {
+.lc-footer-col {
   max-width: 320px;
 }
 
-.footer-col h3,
-.footer-col h4 {
+.lc-footer-col h3,
+.lc-footer-col h4 {
   margin-bottom: 20px;
   font-weight: 700;
   color: #ff8311;
-  letter-spacing: 1px;
-  font-family: 'Permanent Marker', cursive;
 }
 
-.footer-col p {
+.lc-footer-col p {
   font-size: 15px;
   line-height: 1.7;
   color: #cccccc;
-  font-family: 'Permanent Marker', cursive;
 }
 
-.footer-col ul {
+.lc-footer-col ul {
   list-style: none;
   padding: 0;
 }
 
-.footer-col ul li {
+.lc-footer-col ul li {
   margin-bottom: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
   color: #dddddd;
-  font-family: 'Permanent Marker', cursive;
 }
 
-.footer-col ul li:hover {
+.lc-footer-col ul li:hover {
   color: #ff8311;
   transform: translateX(5px);
 }
 
-.footer-bottom {
+.lc-footer-bottom {
   text-align: center;
   margin-top: 40px;
   font-size: 14px;
   border-top: 1px solid rgba(255,255,255,0.1);
   padding-top: 20px;
   color: #aaaaaa;
-  font-family: 'Permanent Marker', cursive;
-}
-/* Card titles (Consistency, Hydration, etc.) */
-.coach-card h3 {
-  font-size: 24px; /* font size */
-  color:#ff8311;;  /* white text */
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.7); /* shadow for readability */
-  margin-bottom: 8px;
-  font-family: 'Permanent Marker', cursive;
-}
-
-/* Short subtitle under the title */
-.coach-card p.short {
-  font-size: 20px;
-  color: #272626b5;
-  margin-bottom: 4px;
-  font-family: 'Permanent Marker', cursive;
-}
-
-/* Description text */
-.coach-card p.details {
-  font-size: 20px;
-  color: #ffffff;
-  line-height: 1.5;
-  font-family: 'Permanent Marker', cursive;
 }

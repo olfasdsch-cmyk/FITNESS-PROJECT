@@ -1,46 +1,39 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
 import './Home.css';
-import background from './home-background.jpeg';
-import heroVideo from './hero-video.mp4'; // your video file
+import heroVideo from './hero-video.mp4';
+import background from './home-background.jpeg'; // import from src
 
 function Home() {
   return (
-    <div className="home-page">
+    <div className="h-home-page">
 
       {/* VIDEO BACKGROUND */}
-      <video
-        className="background-video"
-        src={heroVideo}
-        autoPlay
-        loop
-        muted
-      />
+      <video className="h-background-video" src={heroVideo} autoPlay loop muted />
 
       {/* HERO SECTION */}
-      <section className="hero-section">
+      <section className="h-hero-section">
+        {/* IMPORTED IMAGE */}
         <img
-  src={require("./home-background.jpeg")}
-  alt="Hero Background"
-  className="hero-img"
-/>
-        <div className="hero-content">
-          <h1>Welcome to FITPARTNER</h1>
-          <p>Find gyms, partners, and life coaches to reach your goals</p>
+          src={background}
+          alt="Hero Background"
+          className="h-hero-img"
+        />
+        <div className="h-hero-content">
+          <h1 style={{ fontFamily: "'Permanent Marker', cursive" }}>Train Smarter. Connect Faster.</h1>
+          <p>Find gyms, partners, and life coaches to reach your fitness goals.</p>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="footer">
-        <div className="footer-container">
-
-          <div className="footer-col">
+      <footer className="h-footer">
+        <div className="h-footer-container">
+          <div className="h-footer-col">
             <h3>FITNESS PROJECT</h3>
-            <p>Train smarter, connect faster, and achieve your goals with our all-in-one fitness platform.</p>
+            <p>Your all-in-one fitness platform to stay motivated and achieve goals faster.</p>
           </div>
 
-          <div className="footer-col">
-            <h4>Links</h4>
+          <div className="h-footer-col">
+            <h4>Quick Links</h4>
             <ul>
               <li>Home</li>
               <li>GYMS</li>
@@ -49,17 +42,13 @@ function Home() {
             </ul>
           </div>
 
-          <div className="footer-col">
-            <h4>FITPARTNER</h4>
-            <p>
-              FITPARTNER helps you find the perfect workout partner based on your goals, level, and availability.
-              Stay motivated, build connections, and never train alone again.
-            </p>
+          <div className="h-footer-col">
+            <h4>About FITPARTNER</h4>
+            <p>We help you find the perfect workout partner based on your goals, level, and availability.</p>
           </div>
-
         </div>
 
-        <div className="footer-bottom">
+        <div className="h-footer-bottom">
           © 2026 FITNESS PROJECT. All rights reserved.
         </div>
       </footer>

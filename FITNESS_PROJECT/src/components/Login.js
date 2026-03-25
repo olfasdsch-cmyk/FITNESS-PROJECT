@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userlogin } from "../JS/userSlice/userSlice";
 
-import heroVideo from "./hero-video.mp4"; // video background
+import heroVideo from "./hero-video.mp4"; 
 import "./Login.css";
 
 function Login() {
@@ -13,8 +13,6 @@ function Login() {
 
   return (
     <div className="login-page">
-
-      {/* Video background */}
       <video className="background-video" autoPlay loop muted playsInline>
         <source src={heroVideo} type="video/mp4" />
       </video>
@@ -50,6 +48,7 @@ function Login() {
             onClick={() => {
               setTimeout(() => {
                 dispatch(userlogin(login));
+                localStorage.setItem("user", JSON.stringify({ email: login.email })); 
                 navigate("/profil");
               }, 1000);
             }}
@@ -63,7 +62,6 @@ function Login() {
         </form>
       </div>
 
-      {/* Footer stays the same */}
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-col">

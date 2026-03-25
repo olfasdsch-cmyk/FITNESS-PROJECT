@@ -1,59 +1,14 @@
 const mongoose = require("mongoose");
 
-const schema = mongoose.Schema;
-
-const reservationSchema = new schema(
-
- {
-
-    name: {
-
-    type: String,
-
-    required: true,
-
-  },
-
-  lastname: {
-
-    type: String,
-
-    required: true,
-
-  },
-
-  email: {
-
-    type: String,
-
-    required: true,
-
-  },
-
-  nameac: {
-
-    type: String,
-
-    required: true,
-
-  },
-
- gender: {
-
-    type: String,
-
-    required: true,
-
-  },
-
-    time: {
-
-    type: String,
-
-    required: true,
-
-  },
-
+const ReservationSchema = new mongoose.Schema({
+  gymId: { type: mongoose.Schema.Types.ObjectId, ref: "Salledesport", required: true },
+  gymName: { type: String, required: true },
+  bookedBy: { type: String, required: true },
+  userName: { type: String, required: true }, 
+  sport: { type: String }, 
+  bookingType: { type: String, enum: ["day", "week", "month", "year"], required: true },
+  bookingTime: { type: String }, 
+  createdAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model("reservation", reservationSchema);
+module.exports = mongoose.model("Reservation", ReservationSchema);
