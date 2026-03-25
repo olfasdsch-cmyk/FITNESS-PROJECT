@@ -14,6 +14,7 @@ import Lifecoach from "./components/Lifecoach";
 import Contact from "./components/Contact"; 
 import Salledesport from "./components/salledesport"; 
 import Partner from "./components/partner"; 
+import Dashbord from "./components/Dashbord";
 function App() {
   const isAuth = localStorage.getItem("token");
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ function App() {
        <Route path="/Contact" element={<Contact />} /> 
        <Route path="/Salledesport" element={<Salledesport />} />
        <Route path="/partner" element={<Partner />} /> 
+           <Route path="/dashbord" element={<Dashbord />} /> 
        
        
        

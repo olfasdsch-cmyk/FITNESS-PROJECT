@@ -20,10 +20,10 @@ function Home() {
       {/* HERO SECTION */}
       <section className="hero-section">
         <img
-          src={background}
-          alt="Hero Background"
-          className="hero-img"
-        />
+  src={require("./home-background.jpeg")}
+  alt="Hero Background"
+  className="hero-img"
+/>
         <div className="hero-content">
           <h1>Welcome to FITPARTNER</h1>
           <p>Find gyms, partners, and life coaches to reach your goals</p>

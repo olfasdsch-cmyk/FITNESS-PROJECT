@@ -9,7 +9,7 @@ function Profil() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
-    <div>
+    <div style={{marginTop:"250px"}}>
       <h1>hello {user?.name}</h1>
 
       <button

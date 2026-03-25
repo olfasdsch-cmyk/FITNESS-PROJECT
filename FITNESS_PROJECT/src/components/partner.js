@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbarr from "./Navbarr";
 import "./partner.css";
-import heroVideo from "./hero-video.mp4"; // background video
+import heroVideo from "./hero-video.mp4";
 
 function Partner() {
   const [partners, setPartners] = useState([]);
@@ -17,7 +17,6 @@ function Partner() {
     <div className="partner-page">
       <Navbarr />
 
-      {/* Hero Section */}
       <div className="hero-section">
         <video className="background-video" src={heroVideo} autoPlay loop muted />
         <img
@@ -32,21 +31,23 @@ function Partner() {
         </p>
       </div>
 
-      {/* Partner Cards */}
       <div className="cards-container">
         {partners.map((partner) => (
-          <div
-            className="coach-card"
-            key={partner._id}
-            style={{ backgroundImage: `url(${partner.image})` }}
-          >
-            <h3>{partner.name} {partner.lastname}</h3>
-            <p className="short">{partner.activities} • {partner.gender}</p>
-            <p className="details">
-              Age: {partner.age} <br />
-              Location: {partner.location} <br />
-              Availability: {partner.availability}
-            </p>
+          <div className="coach-card" key={partner._id}>
+            <div
+              className="card-bg"
+              style={{ backgroundImage: `url(${partner.image})` }}
+            ></div>
+
+            <div className="card-content">
+              <h3>{partner.name} {partner.lastname}</h3>
+              <p className="short">{partner.activities} • {partner.gender}</p>
+              <p className="details">
+                Age: {partner.age} <br />
+                Location: {partner.location} <br />
+                Availability: {partner.availability}
+              </p>
+            </div>
           </div>
         ))}
       </div>
