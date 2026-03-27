@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout, updateUser } from "../JS/userSlice/userSlice";
+import { edituser, logout, updateUser } from "../JS/userSlice/userSlice";
 import { deletereservation } from "../JS/reservationslice";
 import videoBg from "./hero-video.mp4"; // Make sure this file exists
 import "./Profil.css"; // CSS file
 
-function Profil({ ping, setPing }) {
+function Profil({ ping, setping }) {
   const user = useSelector((state) => state.user.user);
   const reservations = useSelector((state) => state.reservation.reservationlist);
   const dispatch = useDispatch();
@@ -17,11 +17,11 @@ function Profil({ ping, setPing }) {
 
   // Save About_me update
   const handleUpdateAboutMe = () => {
-    dispatch(updateUser({ id: user._id, About_me: aboutMe }));
+    dispatch(edituser({ id: user._id, About_me: aboutMe }));
   };
 
   return (
-    <div className="profile-page">
+    <div className="profile-page" style={{marginTop:"150px"}}>
       {/* Video background */}
       <video autoPlay loop muted className="background-video">
         <source src={videoBg} type="video/mp4" />
@@ -81,8 +81,8 @@ function Profil({ ping, setPing }) {
                     <button
                       className="delete-btn"
                       onClick={() => {
-                        dispatch(deletereservation({ id: el._id }));
-                        setPing(!ping); // re-render after deletion
+                        dispatch(deletereservation(el._id));
+                        setping(!ping); // re-render after deletion
                       }}
                     >
                       X

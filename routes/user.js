@@ -1,8 +1,8 @@
-const verifyToken = require("../middleware/verifyToken");
 const express = require("express");
-const router = express.Router();
 const User = require("../models/User");
-const bcrypt = require("bcryptjs");
+const router = express.Router();
+const bcrypt = require("bcrypt");
+const user = require("../models/User");
 const jwt = require("jsonwebtoken");
 const {
   loginRules,
@@ -11,71 +11,109 @@ const {
 } = require("../middleware/validator");
 const isAuth = require("../middleware/passport");
 
-// Register
-router.post("/register", async (req, res) => {
-  const { username, email, password } = req.body;
+//register
+router.post("/register", registerRules(), validation, async (req, res) => {
+  const { name, lastname, email, password, category } = req.body;
   try {
-    const existingUser = await User.findOne({ email });
-    if (existingUser) return res.status(400).json({ msg: "User exists" });
+    const newUser = new User({ name, lastname, email, password, category });
+    // check if the email exist
+    const searchedUser = await User.findOne({ email });
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ username, email, password: hashedPassword });
-    await newUser.save();
+    if (searchedUser) {
+      return res.status(400).send({ msg: "email already exist" });
+    }
 
-    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
-    res.status(201).json({ user: newUser, token });
-  } catch (err) {
-    res.status(500).json(err);
+    // hash password
+    const salt = 10;
+    const genSalt = await bcrypt.genSalt(salt);
+    const hashedPassword = await bcrypt.hash(password, genSalt);
+    console.log(hashedPassword);
+    newUser.password = hashedPassword;
+    // generation token
+    //save  the user
+    const newUserToken = await newUser.save();
+    const payload = {
+      _id: newUser._id,
+      name: newUserToken.name,
+    };
+    const token = await jwt.sign(payload, process.env.SecretOrkey, {
+      expiresIn: 3600,
+    });
+
+    res
+      .status(200)
+      .send({ newUserToken, msq: "user is saved", token: `bearer ${token}` });
+  } catch (error) {
+    res.send(error);
+    console.log(error);
   }
 });
-
-// Login
-router.post("/login", async (req, res) => {
+//login
+router.post("/login", loginRules(), validation, async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ msg: "User not found" });
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ msg: "Invalid credentials" });
-
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "1d" });
-    res.status(200).json({ user, token });
-  } catch (err) {
-    res.status(500).json(err);
+    //find if the user exist
+    const searchedUser = await User.findOne({ email });
+    //find if the email not exist
+    if (!searchedUser) {
+      return res.status(400).send({ msg: "Bad credential" });
+    }
+    //if password are equal
+    const match = await bcrypt.compare(password, searchedUser.password);
+    if (!match) {
+      return res.status(400).send({ msg: "Bad credential" });
+    }
+    //creer un token
+    const payload = {
+      _id: searchedUser._id,
+      name: searchedUser.name,
+    };
+    const token = await jwt.sign(payload, process.env.SecretOrKey, {
+      expiresIn: 3600,
+    });
+    //console.log(token)
+    //send the user
+    res
+      .status(200)
+      .send({ user: searchedUser, msg: "success", token: `bearer ${token}` });
+  } catch (error) {
+    res.status(500).send({ msg: "Can not get the user" });
   }
 });
 
-// Current user
-router.get("/current", verifyToken, async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id);
-    res.status(200).json({ user });
-  } catch (err) {
-    res.status(500).json(err);
-  }
+router.get("/current", isAuth(), (req, res) => {
+  res.status(200).send({ user: req.user });
 });
 
-// Update About_me
-router.put("/:id", verifyToken, async (req, res) => {
-  const { id } = req.params;
-  const { About_me } = req.body;
-  try {
-    const updatedUser = await User.findByIdAndUpdate(id, { About_me }, { new: true });
-    res.status(200).json({ user: updatedUser });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// Fetch all users (for Partner page)
+//get all Users
 router.get("/", async (req, res) => {
   try {
-    const users = await User.find();
-    res.status(200).json(users);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    let result = await User.find();
+    res.send({ users: result, msg: "all Users" });
+  } catch (error) {
+    console.log(error);
   }
 });
 
+//delete User
+router.delete("/:id", async (req, res) => {
+  try {
+    let result = await User.findByIdAndDelete(req.params.id);
+    res.send({ msg: "User is deleted" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+//update User
+router.put("/:id", async (req, res) => {
+  try {
+    let result = await User.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $set: { ...req.body } }
+    );
+    res.send({ msg: "User is updated" });
+  } catch (error) {
+    console.log(error);
+  }
+});
 module.exports = router;

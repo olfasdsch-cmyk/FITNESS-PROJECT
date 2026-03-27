@@ -1,17 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getactivities = createAsyncThunk("activities/get", async () => {
+
+export const addactivities = createAsyncThunk("activities/add", async (newactivities) => {
   try {
-    let result = await axios.get("http://localhost:5000/activities/");
+    let result = await axios.post("http://localhost:5000/activities/add", newactivities);
     return result;
   } catch (error) {
     console.log(error);
   }
 });
-export const addactivities = createAsyncThunk("activities/add", async (newactivities) => {
+export const getactivities = createAsyncThunk("activities/get", async () => {
   try {
-    let result = await axios.post("http://localhost:5000/activities/add", newactivities);
+    let result = await axios.get("http://localhost:5000/activities/");
     return result;
   } catch (error) {
     console.log(error);

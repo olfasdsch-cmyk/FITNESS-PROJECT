@@ -13,13 +13,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Lifecoach from "./components/Lifecoach";
 import Contact from "./components/Contact"; 
 import Salledesport from "./components/salledesport"; 
-import Partner from "./components/partner"; 
+import Partner from "./components/Partner"; 
 import Dashbord from "./components/Dashbord";
 import GYMS from "./components/GYMS";
-import getsalledesport  from "./JS/salledesportslice";
-import  getpartner from "./JS/partnerSlice";
-import getactivities from "./JS/activitiesslice";
-import getreservation from "./JS/reservationslice";
+import { getsalledesport } from "./JS/salledesportslice";
+
+import { getactivities } from "./JS/activitiesslice";
+import { getreservation } from "./JS/reservationslice";
+import { getpartner } from "./JS/partnerSlice";
+
 
 function App() {
   const [ping, setping] = useState(false);
@@ -27,11 +29,12 @@ function App() {
 
   useEffect(() => {
     dispatch(userCurrent());
-    dispatch(getsalledesport());
+    dispatch(getsalledesport())
     dispatch(getpartner());
     dispatch(getactivities());
     dispatch(getreservation());
-  }, [dispatch, ping]);
+ 
+  }, [ping]);
 
   return (
     <div className="App">
