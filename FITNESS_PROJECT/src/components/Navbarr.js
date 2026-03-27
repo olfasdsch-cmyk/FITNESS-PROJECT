@@ -13,50 +13,53 @@ function Navbarr() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) setScrolled(true);
-      else setScrolled(false);
+      setScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
   const user = useSelector((state) => state.user.user);
+
   return (
-    <Navbar
-      expand="lg"
-      fixed="top"
-      className={`custom-navbar ${scrolled ? 'scrolled' : ''}`}
-    >
+    <Navbar expand="lg" fixed="top" className={`custom-navbar ${scrolled ? 'scrolled' : ''}`}>
       <Container fluid>
-        {/* Logo */}
         <Navbar.Brand as={Link} to="/">
-          <img
-            src={logo}
-            alt="Logo"
-            className="navbar-logo"
-          />
+          <img src={logo} alt="Logo" className="navbar-logo" />
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
+
           <Nav className="me-auto my-2 my-lg-0" style={{ maxHeight: '100px' }} navbarScroll>
-            <Nav.Link><Link to="/" style={{textDecoration:"none", color:"black"}}>Home</Link></Nav.Link>
-            <Nav.Link><Link to="/salledesport" style={{textDecoration:"none", color:"black"}}>GYMS</Link></Nav.Link>
-            {user?<Nav.Link><Link to="/partner" style={{textDecoration:"none", color:"black"}}>Find Partner</Link></Nav.Link>:null}
-            <Nav.Link><Link to="/Lifecoach" style={{textDecoration:"none", color:"black"}}>LifeCoach</Link></Nav.Link>
-             <Nav.Link><Link to="/Contact" style={{textDecoration:"none", color:"black"}}>Contact</Link></Nav.Link>
-             { user?.category=="Admin"? <Nav.Link><Link to="/dashbord" style={{textDecoration:"none", color:"black"}}>Dashbord</Link></Nav.Link>:null}
+
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/salledesport">GYMS</Nav.Link>
+
+            {user && <Nav.Link as={Link} to="/partner">Find Partner</Nav.Link>}
+
+            <Nav.Link as={Link} to="/Lifecoach">LifeCoach</Nav.Link>
+            <Nav.Link as={Link} to="/Contact">Contact</Nav.Link>
+
+            {user?.category === "Admin" && <Nav.Link as={Link} to="/dashbord">Dashbord</Nav.Link>}
+
           </Nav>
 
-          {/* Login on the right */}
           <Nav className="ms-auto">
-            <Nav.Link>
-             {!user? <Link to="/login" style={{ textDecoration: 'none' }}>
+            {!user ? (
+              <Link to="/login" style={{ textDecoration: 'none' }}>
                 <Button variant="outline-dark">Login</Button>
-              </Link>:<><Link to="/profil" style={{ textDecoration: 'none' }}>
-                <Button variant="outline-dark">Profil</Button>
-              </Link><h5>Hello {user?.name} {user?.lastname}</h5></>}
-            </Nav.Link>
+              </Link>
+            ) : (
+              <>
+                <Link to="/profil" style={{ textDecoration: 'none' }}>
+                  <Button variant="outline-dark">Profil</Button>
+                </Link>
+                <h5>Hello {user?.name} {user?.lastname}</h5>
+              </>
+            )}
           </Nav>
+
         </Navbar.Collapse>
       </Container>
     </Navbar>

@@ -1,53 +1,55 @@
-const express = require('express');
-const router = express.Router();
-const salledesport = require('../models/salledesport');
+const express = require("express");
+const Salledesport = require("../models/salledesport");
+const salledesportRouter = express.Router();
 
-// add salle
-router.post('/add', async (req, res) => {
-  const newSalle = new salledesport(req.body);
-  await newSalle.save();
-  res.send("Salle added");
-});
-
-// get all salles
-router.get('/', async (req, res) => {
-  const salles = await salledesport.find();
-  res.send(salles);
-});
-
-// get one salle by id
-router.get('/:id', async (req, res) => {
+//add salledesport
+salledesportRouter.post("/add", async (req, res) => {
   try {
-    const salle = await salledesport.findById(req.params.id);
-
-    if (!salle) {
-      return res.status(404).send("Gym not found");
-    }
-
-    res.send(salle);
+    let newsalledesport = new Salledesport(req.body);
+    let result = await newsalledesport.save();
+    res.send({ salledesport: result, msg: "salledesport is added" });
   } catch (error) {
-    res.status(500).send(error.message);
+    console.log(error);
   }
 });
-
-// delete salle
-router.delete('/delete/:id', async (req, res) => {
-  await salledesport.findByIdAndDelete(req.params.id);
-  res.send("Salle deleted");
-});
-
-// update salle
-router.patch('/update/:id', async (req, res) => {
+//get all salledesports
+salledesportRouter.get("/", async (req, res) => {
   try {
-    const updatedGym = await salledesport.findByIdAndUpdate(
-      req.params.id,
-      { $set: req.body },
-      { new: true }
-    );
-    res.json(updatedGym);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    let result = await Salledesport.find();
+    res.send({ salledesports: result, msg: "all salledesports" });
+  } catch (error) {
+    console.log(error);
   }
 });
-
-module.exports = router;
+// get all salledesports
+salledesportRouter.get("/", async (req, res) => {
+  try {
+    const gyms = await Salledesport.find();
+    res.status(200).json(gyms); // send array directly
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+//delete salledesport
+salledesportRouter.delete("/:id", async (req, res) => {
+  try {
+    let result = await Salledesport.findByIdAndDelete(req.params.id);
+    res.send({ msg: "salledesport is deleted" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+//update salledesport
+salledesportRouter.put("/:id", async (req, res) => {
+  try {
+    let result = await Salledesport.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $set: { ...req.body } }
+    );
+    res.send({ msg: "salledesport is updated" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+module.exports = salledesportRouter;

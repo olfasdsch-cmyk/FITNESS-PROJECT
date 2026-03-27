@@ -1,26 +1,54 @@
 const express = require("express");
-const router = express.Router();
 const Reservation = require("../models/reservation");
+const reservationRouter = express.Router();
 
-// Add a new reservation
-router.post("/add", async (req, res) => {
+//add reservation
+reservationRouter.post("/add", async (req, res) => {
   try {
-    const newReservation = new Reservation(req.body);
-    await newReservation.save();
-    res.status(201).json({ message: "Reservation saved successfully", reservation: newReservation });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    let newreservation = new Reservation(req.body);
+    let result = await newreservation.save();
+    res.send({ reservation: result, msg: "reservation is added" });
+  } catch (error) {
+    console.log(error);
   }
 });
-
-// Get all reservations (for admin)
-router.get("/", async (req, res) => {
+//get all reservations
+reservationRouter.get("/", async (req, res) => {
   try {
-    const reservations = await Reservation.find().populate("gymId");
-    res.json(reservations);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    let result = await Reservation.find();
+    res.send({ reservations: result, msg: "all reservations" });
+  } catch (error) {
+    console.log(error);
   }
 });
-
-module.exports = router;
+//get one reservation
+reservationRouter.get("/:id", async (req, res) => {
+  try {
+    let result = await Reservation.findById(req.params.id);
+    res.send({ reservation: result, msg: "one reservation" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+//delete reservation
+reservationRouter.delete("/:id", async (req, res) => {
+  try {
+    let result = await Reservation.findByIdAndDelete(req.params.id);
+    res.send({ msg: "reservation is deleted" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+//update reservation
+reservationRouter.put("/:id", async (req, res) => {
+  try {
+    let result = await Reservation.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $set: { ...req.body } }
+    );
+    res.send({ msg: "reservation is updated" });
+  } catch (error) {
+    console.log(error);
+  }
+});
+module.exports = reservationRouter;

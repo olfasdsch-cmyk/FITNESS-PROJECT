@@ -16,4 +16,4 @@ spacename : String,
 
 });
 
-module.exports = mongoose.model("activities", activitiesSchema);
+module.exports = mongoose.model("Activities", activitiesSchema);

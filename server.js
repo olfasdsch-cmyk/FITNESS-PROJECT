@@ -1,41 +1,57 @@
+// server.js
 const express = require("express");
 const cors = require("cors");
-const connectDB = require('./config/db_connect');
+const mongoose = require("mongoose");
+require("dotenv").config(); // Load .env
+
+// Routes
+const userRoute = require("./routes/user");
+const salledesportRoute = require("./routes/salledesport");
 const partnerRoute = require("./routes/partner");
-const Gym = require("./models/salledesport");
+const reservationRoute = require("./routes/reservation");
 
 const app = express();
-require('dotenv').config();
 
-// connect to DB
-connectDB();
-
-// routes
+// Middleware
 app.use(express.json());
 app.use(cors());
 
-app.use("/user", require("./routes/user"));
-app.use('/salledesport', require('./routes/Salledesport'));
-app.use("/partner", partnerRoute);
-
-// delete gym
-app.delete("/salledesport/:id", async (req, res) => {
+// ---------------------------
+// Database connection
+// ---------------------------
+const connectDB = async () => {
   try {
-    const deletedGym = await Gym.findByIdAndDelete(req.params.id);
-
-    if (!deletedGym) {
-      return res.status(404).json({ message: "Gym not found" });
-    }
-
-    res.status(200).json({ message: "Gym deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+    await mongoose.connect(process.env.DB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("✅ MongoDB connected successfully");
+  } catch (err) {
+    console.error("❌ MongoDB connection failed:", err.message);
+    process.exit(1); // Stop server if DB fails
   }
+};
+connectDB();
+
+// ---------------------------
+// Routes
+// ---------------------------
+app.use("/user", userRoute);
+app.use("/salledesport", salledesportRoute);
+app.use("/partner", partnerRoute);
+app.use("/reservation", reservationRoute);
+
+// ---------------------------
+// Test route
+// ---------------------------
+app.get("/", (req, res) => {
+  res.send("✅ Backend is running!");
 });
 
-// server
-const PORT = process.env.PORT;
-app.listen(PORT, (err) =>
-  err ? console.log(err) : console.log("server is running")
-);
-app.use("/reservation", require("./routes/reservation"));
+// ---------------------------
+// Start server
+// ---------------------------
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

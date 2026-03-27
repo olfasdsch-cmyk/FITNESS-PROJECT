@@ -1,19 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import heroVideo from "./hero-video.mp4";
 import "./GYMS.css";
+import { useDispatch, useSelector } from "react-redux";
+import { addreservation } from "../JS/reservationslice";
 
-function GYMS() {
-  const { id } = useParams();
-  const [gym, setGym] = useState(null);
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/salledesport/${id}`)
-      .then((res) => res.json())
-      .then((data) => setGym(data))
-      .catch((err) => console.log(err));
-  }, [id]);
-
+function GYMS({ping,setping}) {
+  const user = useSelector((state) => state.user.user);
+    const gyms=useSelector((state)=>state.salledesport.salledesportlist);
+  const params=useParams();
+  const gym=gyms.filter((el)=>el._id===params.id)[0];
+  const [newreservation, setnewreservation] = useState({
+  
+  gymName:gym?.spacename,
+  bookedBy: "",
+  userName:user?.name+" "+user?.lastname,
+  sport: gym.activities, 
+  bookingType:"",
+  bookingTime:"" ,
+  createdAt: new Date()
+})
+const navigate=useNavigate();
+const dispatch=useDispatch();
   if (!gym) return <p style={{ color: "#fff", textAlign: "center", marginTop: "50px" }}>Loading...</p>;
 
   return (
@@ -44,11 +52,11 @@ function GYMS() {
         <h3>Make a Reservation</h3>
         <form>
           <label>Booking Type:</label>
-          <select>
-            <option value="day">Per Day</option>
-            <option value="week">Per Week</option>
-            <option value="month">Per Month</option>
-            <option value="year">Per Year</option>
+          <select onChange={(e)=>setnewreservation({...newreservation,bookingType:e.target.value})}>
+            <option value="day">Per Day: {gym.price_day}</option>
+            <option value="week">Per Week: {gym.price_week}</option>
+            <option value="month">Per Month: {gym.price_month}</option>
+            <option value="year">Per Year: {gym.price_year}</option>
           </select>
 
           <label>Sport (only for per day):</label>
@@ -59,12 +67,12 @@ function GYMS() {
           </select>
 
           <label>Time:</label>
-          <input type="time" />
+          <input type="time" onChange={(e)=>setnewreservation({...newreservation,bookingTime:e.target.value})}/>
 
           <label>Booked For (Name):</label>
-          <input type="text" placeholder="Name" />
+          <input type="text" placeholder="Name" onChange={(e)=>setnewreservation({...newreservation,bookedBy:e.target.value})}/>
 
-          <button type="submit">Reserve</button>
+          <button onClick={()=>{dispatch(addreservation(newreservation));setping(!ping);alert("votre enregistrement est validée");navigate("/")}}>Reserve</button>
         </form>
       </div>
 

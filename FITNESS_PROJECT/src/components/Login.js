@@ -1,15 +1,32 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { userlogin } from "../JS/userSlice/userSlice";
-
-import heroVideo from "./hero-video.mp4"; 
+import { userLogin } from "../JS/userSlice/userSlice"; // ✅ Correct import
+import heroVideo from "./hero-video.mp4";
 import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
-  const [login, setlogin] = useState({ email: "", password: "" });
   const dispatch = useDispatch();
+  const [login, setLogin] = useState({ email: "", password: "" });
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const action = await dispatch(userLogin(login));
+      // ✅ Check if payload exists
+      if (action.payload && action.payload.token) {
+        localStorage.setItem("token", action.payload.token);
+        navigate("/profil"); // Navigate after successful login
+      } else {
+        setError("Login failed. Please check your credentials.");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Login failed. Please try again.");
+    }
+  };
 
   return (
     <div className="login-page">
@@ -18,41 +35,32 @@ function Login() {
       </video>
 
       <div className="login-wrapper">
-        <form onSubmit={(e) => e.preventDefault()} className="form-signin">
+        <form onSubmit={handleSubmit} className="form-signin">
           <h2 className="form-signin-heading">Please login</h2>
-          
+
+          {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
+
           <input
             type="text"
             className="form-control"
-            name="username"
             placeholder="Email Address"
             required
-            onChange={(e) => setlogin({ ...login, email: e.target.value })}
+            onChange={(e) => setLogin({ ...login, email: e.target.value })}
           />
-          
+
           <input
             type="password"
             className="form-control"
-            name="password"
             placeholder="Password"
             required
-            onChange={(e) => setlogin({ ...login, password: e.target.value })}
+            onChange={(e) => setLogin({ ...login, password: e.target.value })}
           />
 
           <label className="checkbox">
-            <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe" /> Remember me
+            <input type="checkbox" id="rememberMe" /> Remember me
           </label>
 
-          <button
-            className="btn-login"
-            onClick={() => {
-              setTimeout(() => {
-                dispatch(userlogin(login));
-                localStorage.setItem("user", JSON.stringify({ email: login.email })); 
-                navigate("/profil");
-              }, 1000);
-            }}
-          >
+          <button className="btn-login" type="submit">
             Login
           </button>
 
@@ -66,7 +74,9 @@ function Login() {
         <div className="footer-container">
           <div className="footer-col">
             <h3>FITNESS PROJECT</h3>
-            <p>Train smarter, connect faster, and achieve your goals with our all-in-one fitness platform.</p>
+            <p>
+              Train smarter, connect faster, and achieve your goals with our all-in-one fitness platform.
+            </p>
           </div>
 
           <div className="footer-col">

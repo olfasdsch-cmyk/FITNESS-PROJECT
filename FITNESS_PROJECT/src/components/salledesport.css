@@ -27,22 +27,26 @@
   margin-bottom: 40px;
   z-index: 1;
   padding: 100px 20px 50px 20px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sd-hero-img {
   width: 100%;
-  height: 500px;
+  height: 100%;
   object-fit: cover;
-  opacity: 0.5; /* make it transparent so video shows */
+  opacity: 0.6;           /* ✅ visible enough over the video */
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -2;
+  z-index: -1;            /* ✅ above video (-3) but below content (1) */
 }
 
 .sd-hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;             /* ✅ always on top */
 }
 
 .sd-hero-section h1 {
@@ -61,21 +65,22 @@
 .sd-gyms-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-  margin: 20px;
+  justify-content: center;  /* ✅ centers cards nicely */
+  gap: 24px;
+  margin: 20px auto;
+  max-width: 1200px;        /* ✅ prevents stretching on wide screens */
+  padding: 0 20px;
   position: relative;
   z-index: 1;
 }
 
 .sd-gym-card {
-  flex: 1 1 30%;
-  background: rgba(39, 39, 39, 0.7); /* transparent card */
+  width: 320px;             /* ✅ fixed width — all cards same size */
+  flex-shrink: 0;           /* ✅ prevents shrinking */
+  background: rgba(39, 39, 39, 0.7);
   border-radius: 15px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  min-width: 280px;
-  
 }
 
 .sd-gym-card:hover {
@@ -88,7 +93,7 @@
   height: 200px;
   background-size: cover;
   background-position: center;
-  opacity: 0.7; /* semi-transparent to see video */
+  opacity: 0.7;
 }
 
 .sd-gym-info {

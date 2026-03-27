@@ -9,6 +9,10 @@ const UserSchema = new schema({
     type: String,
     required: true,
   },
+   image: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
@@ -17,10 +21,14 @@ const UserSchema = new schema({
     type: String,
     required: true,
   },
-   category: {
+   gender: {
     type: String,
-    default: "user",
+    required: true,
   },
+   About_me: {
+    type: String,
+    required: true,
+  }
 });
 
 module.exports = mongoose.model("user", UserSchema);

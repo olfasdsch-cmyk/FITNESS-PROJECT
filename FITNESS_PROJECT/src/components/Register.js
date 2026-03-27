@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { userRegister } from "../JS/userSlice/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 import Navbarr from "./Navbarr";
-import "./Register.css"; // correct import
+import "./Register.css";
 
 function Register() {
   const [register, setregister] = useState({
@@ -11,19 +11,48 @@ function Register() {
     lastname: "",
     email: "",
     password: "",
+    image: "",
+    gender: "",
+    About_me: "",
+    favoriteSports: [],
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // Example sports list
+  const sportsList = [
+    "Yoga",
+    "Pilates",
+    "Crossfit",
+    "Boxing",
+    "Swimming",
+    "Running",
+    "Cycling",
+    "Fitness",
+    "Zumba",
+  ];
+
+  const handleSportChange = (e) => {
+    const { value, checked } = e.target;
+    if (checked) {
+      setregister({ ...register, favoriteSports: [...register.favoriteSports, value] });
+    } else {
+      setregister({
+        ...register,
+        favoriteSports: register.favoriteSports.filter((sport) => sport !== value),
+      });
+    }
+  };
+
   return (
     <div className="register-page">
-  
       <div className="register-wrapper">
         <form
           onSubmit={(e) => e.preventDefault()}
           className="form-register"
         >
           <h2 className="form-register-heading">Please Register</h2>
+
           <input
             type="text"
             className="form-control"
@@ -65,10 +94,60 @@ function Register() {
             }
           />
 
+          <input
+            type="text"
+            className="form-control"
+            name="image"
+            placeholder="Image URL"
+            required
+            onChange={(e) =>
+              setregister({ ...register, image: e.target.value })
+            }
+          />
+
+          <select
+            className="form-control"
+            required
+            onChange={(e) =>
+              setregister({ ...register, gender: e.target.value })
+            }
+          >
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+
+          <textarea
+            className="form-control"
+            placeholder="About Me"
+            required
+            onChange={(e) =>
+              setregister({ ...register, About_me: e.target.value })
+            }
+          />
+
+          {/* Favorite sports selection */}
+          <div style={{marginTop: "10px", marginBottom: "10px"}}>
+            <label><strong>Favorite Sports:</strong></label>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+              {sportsList.map((sport) => (
+                <label key={sport}>
+                  <input
+                    type="checkbox"
+                    value={sport}
+                    checked={register.favoriteSports.includes(sport)}
+                    onChange={handleSportChange}
+                  />
+                  {sport}
+                </label>
+              ))}
+            </div>
+          </div>
+
           <button
             className="btn-register"
-            onClick={() => {
-              dispatch(userRegister(register));
+            onClick={async () => {
+              await dispatch(userRegister(register));
               navigate("/profil");
             }}
           >

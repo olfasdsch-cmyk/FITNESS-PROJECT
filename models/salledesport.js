@@ -25,4 +25,4 @@ price_day:String,
 
 });
 
-module.exports = mongoose.model("salledesport", salledesportSchema);
+module.exports = mongoose.model("Salledesport", salledesportSchema);
